@@ -49,7 +49,7 @@ Ext.define('PostMessage.Mixin', {
     },
 
     addPostMessageListener : function(listeners) {
-        var controller = this.getController(),
+        var controller = this.getController ? this.getController() : null,
             event, cfg, scope, isString;
 
         for (event in listeners) {
