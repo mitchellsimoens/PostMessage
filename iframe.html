@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html manifest="">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="UTF-8">
+
+    <title>iframe</title>
+
+    <script type="text/javascript">
+        var eventField, dataField;
+
+        function getEventField() {
+            if (!eventField) {
+                eventField = document.getElementById('event');
+            }
+
+            return eventField;
+        }
+
+        function getDataField() {
+            if (!dataField) {
+                dataField = document.getElementById('data');
+            }
+
+            return dataField;
+        }
+
+        function runTest() {
+            parent.postMessage(
+                {
+                    event : getEventField().value,
+                    data  : getDataField().value
+                },
+                '*'
+            );
+        }
+    </script>
+</head>
+<body>
+
+<div>
+    <label for="event">Event Name:</label>
+    <br/>
+    <input type="text" id="event" value="test" />
+</div>
+<hr/>
+<div>
+    <label for="data">Data:</label>
+    <br/>
+    <textarea id="data" style="width: 600px;height: 300px;">{"foo": "bar"}</textarea>
+</div>
+
+<div>
+    <button onClick="runTest()">postMessage</button>
+</div>
+
+</body>
+</html>
