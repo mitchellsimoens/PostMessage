@@ -23,6 +23,10 @@ Ext.define('PostMessage.EventDomain', {
     extend    : 'Ext.app.EventDomain',
     singleton : true,
 
+    requires : [
+        'PostMessage.Observable'
+    ],
+
     type : 'postmessage',
 
     publish : function(event, data, e) {

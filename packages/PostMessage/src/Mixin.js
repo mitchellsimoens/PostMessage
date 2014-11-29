@@ -1,6 +1,10 @@
 Ext.define('PostMessage.Mixin', {
     extend : 'Ext.Mixin',
 
+    requires : [
+        'PostMessage.Observable'
+    ],
+
     mixinConfig : {
         id    : 'postmessage',
         after : {
@@ -55,7 +59,7 @@ Ext.define('PostMessage.Mixin', {
         for (event in listeners) {
             cfg = listeners[event];
 
-            if (Ext.isString(cfg)) {
+            if (Ext.isString(cfg) || Ext.isFunction(cfg)) {
                 cfg = {
                     fn : cfg
                 };
@@ -92,6 +96,10 @@ Ext.define('PostMessage.Mixin', {
                     cfg.fn    = this[cfg.fn];
                     cfg.scope = this;
                 }
+            }
+
+            if (!cfg.scope) {
+                cfg.scope = this;
             }
 
             if (cfg.fn) {
